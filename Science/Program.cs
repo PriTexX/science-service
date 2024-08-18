@@ -1,6 +1,7 @@
 using Science.Auth;
 using Science.Config;
 using Science.DB;
+using Science.Features.DataLoader;
 using Science.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddMosPolytechAuth();
 builder.Services.AddDB();
 builder.AddLogging();
+
+builder.Services.AddScoped<DataLoaderService>();
 
 var app = builder.Build();
 

@@ -1,0 +1,25 @@
+version: "3"
+
+services: 
+  seq: 
+    image: datalust/seq:2024.3
+    restart: unless-stopped
+    volumes:
+      - seq_data:/data
+    environment:
+      ACCEPT_EULA: "Y"
+    ports:
+      - "5341:80"
+  
+  app:
+    image: dockerhub.mospolytech.ru/science:latest
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "7888:8080"
+    
+    
+volumes:
+  seq_data:
+    driver: local

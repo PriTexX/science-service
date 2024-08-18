@@ -33,10 +33,16 @@ public static class Logging
 
                 if (Cfg.IsProduction())
                 {
-                    loggerCfg.MinimumLevel.Override(
-                        "Microsoft.EntityFrameworkCore.Query",
-                        LogEventLevel.Error
-                    );
+                    loggerCfg
+                        .MinimumLevel.Override(
+                            "Microsoft.EntityFrameworkCore.Query",
+                            LogEventLevel.Error
+                        )
+                        .WriteTo.Seq("http://seq:5341", apiKey: Cfg.SeqApiKey);
+                }
+                else
+                {
+                    loggerCfg.WriteTo.Console();
                 }
             }
         );

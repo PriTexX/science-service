@@ -29,6 +29,7 @@ public static class Auth
                     ValidateLifetime = true,
                 }
             );
+
         services.AddAuthorization();
 
         services.AddSwaggerGen(swagger =>

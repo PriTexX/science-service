@@ -11,6 +11,9 @@ file sealed class ExternalCfgValues
 
     [Required]
     public required string RsaPublicKey { get; init; }
+
+    [Required]
+    public required string SeqApiKey { get; init; }
 }
 
 public static class Cfg
@@ -32,13 +35,15 @@ public static class Cfg
         Environment = builder.Environment.EnvironmentName;
         ConnectionString = externalCfgValues.ConnectionString;
         RsaPublicKey = externalCfgValues.RsaPublicKey;
+        SeqApiKey = externalCfgValues.SeqApiKey;
     }
 
-    public static bool IsProduction() => Environment == "Production";
+    public static bool IsProduction() => !IsDevelopment();
 
-    public static bool IsDevelopment() => !IsProduction();
+    public static bool IsDevelopment() => Environment == "Development";
 
     public static string Environment { get; private set; } = null!;
     public static string ConnectionString { get; private set; } = null!;
     public static string RsaPublicKey { get; private set; } = null!;
+    public static string SeqApiKey { get; private set; } = null!;
 }
